@@ -1,7 +1,14 @@
-export default function Home() {
+import React from 'react'
+import Categories from './components/Categories'
+import Products from './components/Products/Products'
+
+function page() {
   return (
-    <>
-    <h1>Hello Next Js</h1>
-    </>
-  );
+    <div>
+      <Categories />
+      <Products />
+    </div>
+  )
 }
+
+export default page
