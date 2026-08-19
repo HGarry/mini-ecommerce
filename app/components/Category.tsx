@@ -16,14 +16,15 @@ interface CategoryProps {
 }
 
 function Category({ category, categoryImage }: CategoryProps) {
-  const {selectedCategory, setSelectedCategory}= useCategoryStore();
-  const isActive =selectedCategory===category.slug;
+  const { selectedCategory, setSelectedCategory } = useCategoryStore();
+  const isActive = selectedCategory === category.slug;
 
   return (
     <Grid
       size={{ xs: 6, md: 4, lg: 2 }}
-      sx={{ position: "relative",
-        backgroundColor: isActive ? "#7fffd4" : "transparent",
+      sx={{
+        position: "relative",
+        backgroundColor: isActive ? "#BF00FF" : "transparent",
         color: isActive ? "#fefefe" : "#333",
         borderRadius: 4,
         "&:nth-of-type(2n) .category-border": {
@@ -36,7 +37,7 @@ function Category({ category, categoryImage }: CategoryProps) {
           borderRight: { lg: "none" },
         },
       }}
-      onClick={()=>setSelectedCategory(category.slug)}
+      onClick={() => setSelectedCategory(category.slug)}
     >
       <Box
         sx={{
@@ -47,12 +48,11 @@ function Category({ category, categoryImage }: CategoryProps) {
           left: 0,
           bottom: "-3rem",
           margin: "auto",
-          borderTopColor: isActive ? "#7fffd4" : "transparent",
-          
+          borderTopColor: isActive ? "#BF00FF" : "transparent",
         }}
       ></Box>
       <Box
-      className="category-border"
+        className="category-border"
         sx={{
           borderRight: "1px solid #e0e0e0",
           textAlign: "center",
@@ -60,9 +60,14 @@ function Category({ category, categoryImage }: CategoryProps) {
           cursor: "pointer",
         }}
       >
-
-        <Image src={categoryImage} alt={category.name} width={500} height={500} style={{width: 50,height:50, margin: "auto"}}></Image>
-        <Typography component="h2" sx={{mt:2}}>
+        <Image
+          src={categoryImage}
+          alt={category.name}
+          width={500}
+          height={500}
+          style={{ width: 50, height: 50, margin: "auto" }}
+        ></Image>
+        <Typography component="h2" sx={{ mt: 2 }}>
           {category.name}
         </Typography>
       </Box>

@@ -2,11 +2,10 @@
 import { Product } from "@/types/general-types";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
-import Button from "@mui/material/Button";
+import CustomButton from "../CustomButton";
 
 interface ProductProps {
   product: Product;
@@ -26,7 +25,7 @@ function ProductCard({ product }: ProductProps) {
           height: "100%",
           cursor: "pointer",
           ":hover": {
-            backgroundColor: "#7fffd4",
+            backgroundColor: "#BF00FF",
             boxShadow: `
               0 20px 40px -4px rgba(0, 0, 0, 0.12),
               0 8px 16px -2px rgba(0, 0, 0, 0.06),
@@ -45,10 +44,7 @@ function ProductCard({ product }: ProductProps) {
         />
         <Typography component="h3">{title}</Typography>
         <Typography>$ {price}</Typography>
-        <Button sx={{mt: 2}} variant="outlined" startIcon={<AddShoppingCartIcon />}>
-  ADD TO CART
-</Button>
-
+        <CustomButton product={product} />
       </Box>
     </Grid>
   );
