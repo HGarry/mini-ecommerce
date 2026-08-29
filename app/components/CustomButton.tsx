@@ -1,26 +1,23 @@
 "use client";
-import React from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useCartStore } from "../store/useCartStore";
-import Button from "@mui/material/Button";
-import Link from "next/link";
+import { Product } from "@/types/general-types";
 
-function CustomButton({ product }) {
-    const {cart,addToCart} = useCartStore((state) => state);
-    console.log(cart)
+interface CustomButtonProps {
+  product: Product;
+}
+
+function CustomButton({ product }: CustomButtonProps) {
+  const addToCart = useCartStore((state) => state.addToCart);
   return (
-    
-    <Button
-      
-      sx={{ mt: 2 }}
-      variant="outlined"
-      startIcon={<AddShoppingCartIcon />}
+    <button
+      type="button"
+      className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-purple-600 px-4 py-2 font-medium text-purple-600 transition-colors duration-200 hover:bg-purple-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
       onClick={() => addToCart(product, 1)}
     >
+      <AddShoppingCartIcon fontSize="small" />
       ADD TO CART
-    </Button>
-    
-    
+    </button>
   );
 }
 

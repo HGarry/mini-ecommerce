@@ -1,10 +1,8 @@
 "use client";
 import { Product } from "@/types/general-types";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-
-import Typography from "@mui/material/Typography";
 import Image from "next/image";
+import Link from "next/link";
 import CustomButton from "../CustomButton";
 
 interface ProductProps {
@@ -15,37 +13,24 @@ function ProductCard({ product }: ProductProps) {
   const { title, thumbnail, price } = product;
   return (
     <Grid size={{ xs: 12, md: 4, lg: 3 }}>
-      <Box
-        sx={{
-          p: 5,
-          m: 2,
-          textAlign: "center",
-          borderRadius: 4,
-          boxShadow: 3,
-          height: "100%",
-          cursor: "pointer",
-          ":hover": {
-            backgroundColor: "#BF00FF",
-            boxShadow: `
-              0 20px 40px -4px rgba(0, 0, 0, 0.12),
-              0 8px 16px -2px rgba(0, 0, 0, 0.06),
-              inset 0 1px 2px 0 rgba(255, 255, 255, 1)
-            `,
-            color: "#fefefe",
-          },
-        }}
-      >
-        <Image
-          src={thumbnail}
-          alt={title}
-          width={800}
-          height={500}
-          style={{ width: 100, height: 100, margin: "auto" }}
-        />
-        <Typography component="h3">{title}</Typography>
-        <Typography>$ {price}</Typography>
+      <article className="group m-2 flex h-full flex-col rounded-xl border border-gray-100 bg-white p-4 text-center shadow-sm transition-shadow duration-200 hover:shadow-md">
+        <Link href={`/products/${product.id}`} aria-label={`View ${title}`}>
+          <div className="overflow-hidden rounded-lg bg-gray-50">
+            <Image
+              src={thumbnail}
+              alt={title}
+              width={800}
+              height={500}
+              className="mx-auto h-44 w-full object-contain p-4 transition-transform duration-300 ease-in-out group-hover:scale-110"
+            />
+          </div>
+          <h3 className="mt-4 truncate font-semibold text-gray-900">{title}</h3>
+        </Link>
+        <p className="mt-2 text-lg font-bold text-gray-900">
+          {price.toLocaleString()} MMK
+        </p>
         <CustomButton product={product} />
-      </Box>
+      </article>
     </Grid>
   );
 }

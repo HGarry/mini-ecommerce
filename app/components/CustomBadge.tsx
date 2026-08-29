@@ -18,23 +18,25 @@ const CartBadge = styled(Badge)`
 
 export default function IconButtonWithBadge() {
   const [isMounted, setIsMounted] = useState(false);
-  
-  // Zustand store ထဲမှ getTotalQuantity function ကို ခေါ်ယူခြင်း
+
   const totalQuantity = useCartStore((state) => state.getTotalQuantity());
 
-  // Client-side ရောက်မှ Component ကို Render လုပ်ရန် (Hydration mismatch မဖြစ်စေရန်)
   useEffect(() => {
-    setIsMounted(true);
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (
     <Link href="/cart">
-      <IconButton aria-label={`view cart with ${isMounted ? totalQuantity : 0} items`}>
+      <IconButton
+        aria-label={`view cart with ${isMounted ? totalQuantity : 0} items`}
+      >
         <ShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
-        <CartBadge 
-          badgeContent={isMounted ? totalQuantity : 0} 
-          color="success" 
-          overlap="circular" 
+        <CartBadge
+          badgeContent={isMounted ? totalQuantity : 0}
+          color="success"
+          overlap="circular"
         />
       </IconButton>
     </Link>
