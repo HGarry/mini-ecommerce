@@ -38,6 +38,12 @@ function Cart() {
           <p className="mt-2 text-sm text-slate-500">
             Add something you love and it will appear here.
           </p>
+          <Link
+            href="/products"
+            className="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 text-sm font-bold text-white hover:bg-fuchsia-600"
+          >
+            Browse Products
+          </Link>
         </section>
       </main>
     );
@@ -45,8 +51,15 @@ function Cart() {
 
   return (
     <main className="flex min-h-[calc(100vh-7rem)] flex-col px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col">
+      <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 lg:gap-12">
+        <Link
+            href="/products"
+            className="text-sm font-semibold text-slate-500 hover:text-fuchsia-600"
+          >
+            ← Go Back to Products
+          </Link>
         <header className="mb-8 flex items-end justify-between gap-4">
+          
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-fuchsia-600">
               Your selection

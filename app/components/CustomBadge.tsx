@@ -7,7 +7,6 @@ import Badge, { badgeClasses } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Link from "next/link";
 import { useCartStore } from "../store/useCartStore";
-// import { useCartStore } from "@/store/useCartStore"; // မိမိ store path အမှန်သို့ ပြင်ပေးပါ
 
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
@@ -35,7 +34,7 @@ export default function IconButtonWithBadge() {
         <ShoppingCartIcon fontSize="small" sx={{ color: "#fff" }} />
         <CartBadge
           badgeContent={isMounted ? totalQuantity : 0}
-          color="success"
+          color="secondary"
           overlap="circular"
         />
       </IconButton>

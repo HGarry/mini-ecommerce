@@ -71,7 +71,7 @@ function ProductDetailPage() {
     <main className="min-h-[calc(100vh-7rem)] bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <Link
-          href="/"
+          href="/products"
           className="inline-block rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-600 transition hover:border-purple-600 hover:text-purple-600"
         >
           ← Back to Products

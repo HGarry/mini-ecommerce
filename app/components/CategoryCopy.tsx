@@ -20,26 +20,23 @@ function Category({ category, categoryImage }: CategoryProps) {
   const isActive = selectedCategory === category.slug;
 
   return (
-    <Grid
-      size={{ xs: 6, md: 6, lg: 2 }}
+   
+      <Box
       sx={{
+        // Mobile: Flex item with fixed width to prevent shrinking
+        flex: { xs: "0 0 auto", md: "1" },
+        width: { xs: "100px", sm: "120px", md: "auto" },
         position: "relative",
         backgroundColor: isActive ? "#BF00FF" : "transparent",
         color: isActive ? "#fefefe" : "#333",
         borderRadius: 4,
-        "&:nth-of-type(2n) .category-border": {
-          borderRight: { xs: "none", md: "1px solid #e0e0e0" },
-        },
-        "&:nth-of-type(3n) .category-border": {
-          borderRight: { md: "none", lg: "1px solid #e0e0e0" },
-        },
-        "&:nth-of-type(6n) .category-border": {
-          borderRight: { lg: "none" },
-        },
+        cursor: "pointer",
+        transition: "all 0.2s ease-in-out",
+        p: 1.5,
       }}
       onClick={() => setSelectedCategory(category.slug)}
     >
-      <Box
+<Box
         sx={{
           border: "2rem solid transparent",
           width: "0",
@@ -71,7 +68,9 @@ function Category({ category, categoryImage }: CategoryProps) {
           {category.name}
         </Typography>
       </Box>
-    </Grid>
+      </Box>
+   
+          
   );
 }
 

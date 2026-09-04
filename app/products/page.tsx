@@ -1,8 +1,14 @@
 import React from 'react'
+import Categories from '../components/Categories'
+import Products from '../components/Products/Products'
+
 
 function page() {
   return (
-    <div>page</div>
+    <div>
+      <Categories />
+      <Products />
+    </div>
   )
 }
 

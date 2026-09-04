@@ -15,13 +15,18 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CustomBadge from "./CustomBadge";
+import Link from "next/link";
 
 interface Props {
   window?: () => Window;
 }
 
 const drawerWidth = 240;
-const navItems = ["Home", "Products", "Contact"];
+const navItems = [
+  { name: "Home", path: "/" },
+  { name: "Products", path: "/products" },
+  { name: "Contact", path: "/contact" },
+];
 
 export default function Navbar(props: Props) {
   const { window } = props;
@@ -33,15 +38,21 @@ export default function Navbar(props: Props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Shopper
-      </Typography>
+      <Link href="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Typography variant="h6" sx={{ my: 2 }}>
+          Shopper
+        </Typography>
+      </Link>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton
+              component={Link}
+              href={item.path}
+              sx={{ textAlign: "center" }}
+            >
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -53,51 +64,71 @@ export default function Navbar(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ width: "100%" }}>
       <CssBaseline />
-      <AppBar component="nav">
-        <Toolbar
-          sx={{
-            backgroundColor: "#BF00FF",
-            color: "#fefefe",
-            justifyContent: "space-between",
-          }}
-        >
+      <AppBar
+        position="static"
+        sx={{ background: "linear-gradient(135deg, #BF00FF 0%, #7B00FF 100%)" }}
+      >
+        <Toolbar sx={{ justifyContent: "space-between", position: "relative" }}>
+          {/* Left: Mobile Menu Icon */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
+
+          {/* Center on Mobile (xs) / Left-aligned on Desktop (sm) */}
           <Typography
             variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            component={Link}
+            href="/"
+            sx={{
+              color: "inherit",
+              textDecoration: "none",
+              fontWeight: "bold",
+              // Mobile centering logic
+              position: { xs: "absolute", sm: "static" },
+              left: { xs: "50%", sm: "auto" },
+              transform: { xs: "translateX(-50%)", sm: "none" },
+              // Desktop layout logic
+              flexGrow: { sm: 1 },
+              textAlign: { xs: "center", sm: "left" },
+            }}
           >
             Shopper
           </Typography>
+
+          {/* Desktop Nav Items */}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+              <Button
+                key={item.name}
+                component={Link}
+                href={item.path}
+                sx={{ color: "#fff" }}
+              >
+                {item.name}
               </Button>
             ))}
           </Box>
+
+          {/* Right: Cart Badge */}
           <CustomBadge />
         </Toolbar>
       </AppBar>
+
       <nav>
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
+          ModalProps={{ keepMounted: true }}
           sx={{
             display: { xs: "block", sm: "none" },
             "& .MuiDrawer-paper": {
@@ -109,9 +140,6 @@ export default function Navbar(props: Props) {
           {drawer}
         </Drawer>
       </nav>
-      <Box component="main" sx={{ p: 3 }}>
-        <Toolbar />
-      </Box>
     </Box>
   );
 }
